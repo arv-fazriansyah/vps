@@ -5,11 +5,21 @@ FROM ubuntu:20.04
 RUN apt-get update && \
     apt-get install -y shellinabox && \
     apt-get install -y systemd && \
+    apt-get install -y neofetch nano git wget curl sudo openssh-server net-tools && \
+    curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && \
+    dpkg -i cloudflared.deb && \
+    rm cloudflared.deb && \
+    echo 'root:root' | chpasswd && \
+    echo 'rm -f $HOME/.bash_history' >> ~/.bashrc && \
+    touch ~/.hushlogin && \
+    echo -e "service cloudflared start &> /dev/null\nservice ssh start &> /dev/null\nclear\nneofetch" >> ~/.bashrc && \
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
+    echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
+    echo 'export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> ~/.bashrc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN echo 'root:root' | chpasswd
 
-# Expose the web-based terminal port
+# Expose port 4200
 EXPOSE 4200
 
 # Start shellinabox
