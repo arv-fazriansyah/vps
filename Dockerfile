@@ -33,7 +33,6 @@ RUN apt-get update && \
     echo 'export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> ~/.bashrc && \
     # Permit root login and disable strict host key checking
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
-    echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
     # Set timezone to Asia/Jakarta
     ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata
