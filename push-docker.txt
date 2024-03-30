@@ -1,0 +1,11 @@
+# docker build -t ubuntu .
+# docker run -d -p 8080:80 ubuntu
+# docker tag ubuntu:latest fazriansyah/ubuntu:latest
+# docker push fazriansyah/ubuntu:latest
+# docker stop $(docker ps -q)
+# docker rmi -f $(docker images -q)
+# docker stop $(docker ps -q)
+# docker rm $(docker ps -aq)
+# docker build -t warp-clash-api .
+# docker tag warp-clash-api:latest fazriansyah/warp-clash-api:latest
+# docker push fazriansyah/warp-clash-api:latest
