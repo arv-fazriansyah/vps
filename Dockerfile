@@ -35,22 +35,16 @@ RUN apt-get update && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     # Set timezone to Asia/Jakarta
     ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && \
-    dpkg-reconfigure --frontend noninteractive tzdata
+    dpkg-reconfigure --frontend noninteractive tzdata && \
+    # Install Swap RAM
+    fallocate -l 1G /swapfile && \
+    chmod 600 /swapfile && \
+    mkswap /swapfile && \
+    swapon /swapfile && \
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab
 
 # Expose port 4200
 EXPOSE 4200
 
 # Start shellinabox
 CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
-
-# docker build -t ubuntu .
-# docker run -d -p 8080:80 ubuntu
-# docker tag ubuntu:latest fazriansyah/ubuntu:latest
-# docker push fazriansyah/ubuntu:latest
-# docker stop $(docker ps -q)
-# docker rmi -f $(docker images -q)
-# docker stop $(docker ps -q)
-# docker rm $(docker ps -aq)
-# docker build -t warp-clash-api .
-# docker tag warp-clash-api:latest fazriansyah/warp-clash-api:latest
-# docker push fazriansyah/warp-clash-api:latest
