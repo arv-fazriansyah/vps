@@ -35,13 +35,7 @@ RUN apt-get update && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     # Set timezone to Asia/Jakarta
     ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && \
-    dpkg-reconfigure --frontend noninteractive tzdata && \
-    # Install Swap RAM
-    fallocate -l 1G /swapfile && \
-    chmod 600 /swapfile && \
-    mkswap /swapfile && \
-    swapon /swapfile && \
-    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+    dpkg-reconfigure --frontend noninteractive tzdata 
 
 # Expose port 4200
 EXPOSE 4200
