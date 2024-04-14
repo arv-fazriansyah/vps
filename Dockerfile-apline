@@ -1,0 +1,14 @@
+# Gunakan image Alpine Linux terbaru
+FROM alpine:latest
+
+# Buat pengguna root dengan kata sandi root
+RUN echo "root:root" | chpasswd
+
+# Perbarui indeks paket dan instal paket yang diperlukan
+RUN apk update && \
+    apk add --no-cache \
+    bash \
+    shadow
+
+# Definisikan perintah default yang akan dieksekusi ketika kontainer dijalankan
+CMD ["/bin/bash"]
