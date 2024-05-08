@@ -31,7 +31,7 @@ Berikut langkah-langkahnya:
 5. **Setel Pengaturan Permanent**:
    Agar swap space aktif setiap kali sistem di-boot, tambahkan baris berikut ke dalam file `/etc/fstab`:
    ```
-   /swapfile none swap sw 0 0
+   echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
    ```
 
 Setelah langkah-langkah ini, swap space akan aktif dan digunakan oleh sistem Ubuntu Anda. Pastikan untuk memantau penggunaan swap space dan kapasitas disk secara berkala, terutama jika penggunaan swap space terus meningkat, ini bisa menjadi indikasi bahwa kapasitas RAM fisik mungkin perlu ditingkatkan.
